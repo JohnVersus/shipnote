@@ -1,22 +1,19 @@
 import Link from "next/link";
-import { listUpdates } from "../lib/updates.js";
+import { listUpdates } from "../../lib/updates.js";
 
 export const dynamic = "force-dynamic";
 
-export default async function Home() {
+export default async function EmbedPage() {
   const updates = await listUpdates();
 
   return (
     <main>
       <h1>Shipnote</h1>
-      <p>
-        <Link href="/post">Post an update</Link>
-      </p>
       {updates.length === 0 ? (
         <p>No updates yet.</p>
       ) : (
         <ul>
-          {updates.map((update) => (
+          {updates.slice(0, 10).map((update) => (
             <li key={update.id}>
               <Link href={`/u/${update.id}`}>{update.title}</Link>
             </li>
