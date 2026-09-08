@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { postUpdate } from "./actions.js";
 
 export const dynamic = "force-dynamic";
@@ -7,22 +8,26 @@ export default async function PostPage({ searchParams }) {
   const error = typeof params?.error === "string" ? params.error : "";
 
   return (
-    <main>
-      <h1>Post an update</h1>
-      <form action={postUpdate}>
+    <main className="shell">
+      <header className="top">
+        <div>
+          <Link className="brand" href="/">Shipnote</Link>
+          <p className="lede">No account. This update gets a public link.</p>
+        </div>
+      </header>
+      <form className="panel" action={postUpdate}>
+        <h1>Post an update</h1>
         <p>
           <label htmlFor="title">Title</label>
-          <br />
           <input id="title" name="title" required maxLength={120} />
         </p>
         <p>
           <label htmlFor="body">Body</label>
-          <br />
           <textarea id="body" name="body" required rows={8} maxLength={4000} />
         </p>
         <button type="submit">Post</button>
+        {error ? <p className="error">{error}</p> : null}
       </form>
-      {error ? <p>{error}</p> : null}
     </main>
   );
 }
