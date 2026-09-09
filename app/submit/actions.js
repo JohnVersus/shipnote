@@ -14,5 +14,5 @@ export async function submitTestimonial(formData) {
     redirect(`/submit?error=${encodeURIComponent(result.error)}`);
   }
 
-  redirect("/");
+  redirect(`/q/${result.item.id}`);
 }

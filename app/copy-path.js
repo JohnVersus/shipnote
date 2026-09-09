@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export default function CopyPath({ path }) {
+export default function CopyPath({ path, label = "Link" }) {
   const [copied, setCopied] = useState(false);
   const [url, setUrl] = useState(path);
 
@@ -21,7 +21,7 @@ export default function CopyPath({ path }) {
 
   return (
     <div className="embed-box">
-      <span>Embed</span>
+      <span>{label}</span>
       <code>{url}</code>
       <button type="button" onClick={copy}>{copied ? "Copied" : "Copy"}</button>
     </div>

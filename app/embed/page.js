@@ -26,11 +26,13 @@ export default async function EmbedPage() {
         <ol>
           {items.slice(0, 8).map((item) => (
             <li key={item.id}>
-              <blockquote>{item.quote}</blockquote>
-              <footer>
-                <span className="avatar" aria-hidden="true">{initials(item.name)}</span>
-                <strong>{item.name}</strong>
-              </footer>
+              <Link href={`/q/${item.id}`}>
+                <blockquote>{item.quote}</blockquote>
+                <footer>
+                  <span className="avatar" aria-hidden="true">{initials(item.name)}</span>
+                  <strong>{item.name}</strong>
+                </footer>
+              </Link>
             </li>
           ))}
         </ol>
