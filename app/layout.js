@@ -2,7 +2,7 @@ import "./globals.css";
 
 export const metadata = {
   title: "Shipnote",
-  description: "A public changelog. Post an update, share a link, embed the latest.",
+  description: "Collect a testimonial, show a public wall, and embed it.",
 };
 
 export default function RootLayout({ children }) {

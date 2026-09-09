@@ -1,12 +1,12 @@
 :root {
   color-scheme: light;
-  --bg: #f4f0e8;
-  --paper: #fffcf7;
-  --ink: #1c1917;
-  --muted: #78716c;
-  --line: #e6dfd4;
-  --accent: #0f5c56;
-  --accent-ink: #f7fffd;
+  --bg: #f3efe6;
+  --ink: #1b1714;
+  --muted: #6d655d;
+  --line: #e4d9cb;
+  --paper: #fffdf8;
+  --accent: #243f38;
+  --accent-ink: #f6fffc;
   --danger: #9f1239;
 }
 
@@ -14,43 +14,73 @@
 
 html, body {
   margin: 0;
-  padding: 0;
-  background: var(--bg);
+  min-height: 100%;
+  background:
+    radial-gradient(800px 360px at 90% -10%, #fff8ee 0%, transparent 55%),
+    var(--bg);
   color: var(--ink);
-  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-family: "Iowan Old Style", Palatino, Georgia, serif;
 }
 
 a { color: inherit; }
 
-.shell {
-  width: min(720px, calc(100% - 32px));
-  margin: 0 auto;
-  padding: 48px 0 72px;
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
-.top {
+.shell {
+  width: min(980px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 56px 0 88px;
+}
+
+.mast {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 28px;
+  gap: 24px;
+  margin-bottom: 36px;
 }
 
-.brand {
-  font-size: 15px;
-  letter-spacing: 0.08em;
+.mast.compact { margin-bottom: 24px; }
+
+.kicker, .composer-hint, .composer-bar span, .card footer span, .widget header {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.kicker {
+  margin: 0 0 8px;
+  font-size: 12px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  color: var(--muted);
+}
+
+.wordmark {
+  display: block;
+  font-size: 56px;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
   text-decoration: none;
 }
 
 .lede {
-  margin: 8px 0 0;
+  margin: 14px 0 0;
+  max-width: 34ch;
   color: var(--muted);
   font-family: ui-sans-serif, system-ui, sans-serif;
-  font-size: 15px;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
-.button, button {
+.button, .composer button {
   appearance: none;
   border: 0;
   border-radius: 999px;
@@ -58,96 +88,127 @@ a { color: inherit; }
   color: var(--accent-ink);
   font-family: ui-sans-serif, system-ui, sans-serif;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 650;
   text-decoration: none;
-  padding: 10px 16px;
+  padding: 12px 18px;
   cursor: pointer;
 }
 
-.list {
-  display: grid;
-  gap: 12px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.wall {
+  columns: 2;
+  column-gap: 16px;
 }
 
-.card, .note, .panel {
+.card, .empty-state, .composer {
   background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: 22px;
+  box-shadow: 0 16px 40px rgba(48, 36, 20, 0.05);
 }
-
-.card, .panel { padding: 18px 20px; }
 
 .card {
-  display: block;
-  text-decoration: none;
+  break-inside: avoid;
+  margin: 0 0 16px;
+  padding: 22px 22px 18px;
 }
 
-.card:hover { border-color: #d5cdc0; }
-
-.date, .empty, label, .hint {
-  font-family: ui-sans-serif, system-ui, sans-serif;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.card h2, .note h1, .panel h1 {
-  margin: 6px 0 0;
-  font-size: 28px;
-  font-weight: 560;
+.card blockquote, .widget blockquote {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.35;
   letter-spacing: -0.03em;
 }
 
-.excerpt, .body {
-  white-space: pre-wrap;
-  line-height: 1.55;
-}
-
-.panel { display: grid; gap: 14px; }
-
-input, textarea {
-  width: 100%;
-  margin-top: 6px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: #fff;
-  color: var(--ink);
-  font: 16px/1.45 ui-sans-serif, system-ui, sans-serif;
-  padding: 12px 12px;
-}
-
-.error {
-  color: var(--danger);
+.card footer {
+  display: grid;
+  margin-top: 18px;
   font-family: ui-sans-serif, system-ui, sans-serif;
 }
 
-.embed {
-  width: min(420px, calc(100% - 24px));
-  margin: 12px auto;
+.card footer span, .widget-empty { color: var(--muted); }
+
+.empty-state { padding: 36px; }
+.empty-state p { margin: 0 0 16px; font-size: 28px; }
+
+.composer { padding: 28px; }
+
+.composer textarea, .composer input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  padding: 0;
+  resize: vertical;
+}
+
+.composer textarea {
+  min-height: 180px;
+  margin-top: 16px;
+  font-size: 28px;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+}
+
+.who {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.composer input {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.composer textarea:focus, .composer input:focus { outline: none; }
+
+.composer-hint { margin: 0; color: var(--muted); font-size: 13px; }
+
+.composer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.composer-bar span, .error { font-family: ui-sans-serif, system-ui, sans-serif; }
+.error { color: var(--danger); }
+
+.widget {
+  width: min(380px, calc(100% - 16px));
+  margin: 8px auto;
   padding: 16px;
   background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: 18px;
   font-family: ui-sans-serif, system-ui, sans-serif;
 }
 
-.embed h1 {
-  margin: 0 0 12px;
-  font-size: 14px;
-  letter-spacing: 0.08em;
+.widget header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.embed ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 10px;
+.widget header a { color: var(--muted); }
+.widget ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.widget blockquote { font-family: Georgia, serif; font-size: 16px; }
+.widget strong { display: block; margin-top: 6px; font-size: 13px; }
+.widget-empty { margin: 0; }
+
+@media (max-width: 720px) {
+  .wordmark { font-size: 42px; }
+  .wall { columns: 1; }
+  .who, .mast, .composer-bar { display: flex; flex-direction: column; align-items: stretch; }
+  .composer textarea { font-size: 22px; }
 }
-
-.embed a { text-decoration: none; }
-
-.embed .date { display: block; }
