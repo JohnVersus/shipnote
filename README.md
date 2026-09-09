@@ -7,6 +7,7 @@ Demo: https://shipnote-alpha.vercel.app
 No account.
 
 - Add a testimonial at `/submit` (quote and name, optional detail).
+- Submit lands on `/q/{id}`, a public page with a copyable link. The wall and `/embed` point at that same page.
 - The public wall is `/`.
 - The same quotes embed at `/embed` (up to 8).
 
