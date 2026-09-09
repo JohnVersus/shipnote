@@ -26,7 +26,7 @@ export default async function Home() {
         <p className="kicker">Public wall</p>
         <h1>What people actually said.</h1>
         <p className="lede">No account. A quote goes on this wall, and the same quotes sit in the embed.</p>
-        <CopyPath path="/embed" />
+        <CopyPath path="/embed" label="Embed" />
       </section>
 
       {items.length === 0 ? (
@@ -38,15 +38,17 @@ export default async function Home() {
         <section className="wall">
           {items.map((item) => (
             <article className="card" key={item.id}>
-              <span className="quote-mark" aria-hidden="true">“</span>
-              <blockquote>{item.quote}</blockquote>
-              <footer>
-                <span className="avatar" aria-hidden="true">{initials(item.name)}</span>
-                <span>
-                  <strong>{item.name}</strong>
-                  {item.detail ? <em>{item.detail}</em> : null}
-                </span>
-              </footer>
+              <Link className="card-link" href={`/q/${item.id}`}>
+                <span className="quote-mark" aria-hidden="true">“</span>
+                <blockquote>{item.quote}</blockquote>
+                <footer>
+                  <span className="avatar" aria-hidden="true">{initials(item.name)}</span>
+                  <span>
+                    <strong>{item.name}</strong>
+                    {item.detail ? <em>{item.detail}</em> : null}
+                  </span>
+                </footer>
+              </Link>
             </article>
           ))}
         </section>
