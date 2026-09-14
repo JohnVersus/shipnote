@@ -266,3 +266,6 @@ a { color: inherit; }
 .who-line { display: flex; align-items: center; gap: 10px; margin: 22px 0; }
 .who-line em { display: block; color: var(--muted); font-style: normal; font-size: 13px; }
 .widget a { text-decoration: none; color: inherit; }
+
+.share-stack { display: grid; gap: 10px; width: min(720px, 100%); }
+.share-stack .embed-box code { white-space: pre-wrap; }

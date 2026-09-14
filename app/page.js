@@ -1,5 +1,5 @@
 import Link from "next/link";
-import CopyPath from "./copy-path.js";
+import EmbedShare from "./embed-share.js";
 import { listTestimonials } from "../lib/testimonials.js";
 
 export const dynamic = "force-dynamic";
@@ -26,7 +26,7 @@ export default async function Home() {
         <p className="kicker">Public wall</p>
         <h1>What people actually said.</h1>
         <p className="lede">No account. A quote goes on this wall, and the same quotes sit in the embed.</p>
-        <CopyPath path="/embed" label="Embed" />
+        <EmbedShare path="/embed" />
       </section>
 
       {items.length === 0 ? (
