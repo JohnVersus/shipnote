@@ -28,6 +28,12 @@ export default async function EmbedPage() {
             <li key={item.id}>
               <Link href={`/q/${item.id}`}>
                 <blockquote>{item.quote}</blockquote>
+                {item.imageUrl ? (
+                  <img className="media-image" src={item.imageUrl} alt="" />
+                ) : null}
+                {item.videoUrl ? (
+                  <video className="media-video" src={item.videoUrl} controls playsInline preload="metadata" />
+                ) : null}
                 <footer>
                   <span className="avatar" aria-hidden="true">{initials(item.name)}</span>
                   <strong>{item.name}</strong>

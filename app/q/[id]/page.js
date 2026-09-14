@@ -27,6 +27,12 @@ export default async function QuotePage({ params }) {
       <article className="composer quote-page">
         <p className="kicker">Testimonial</p>
         <blockquote>{item.quote}</blockquote>
+        {item.imageUrl ? (
+          <img className="media-image" src={item.imageUrl} alt="" />
+        ) : null}
+        {item.videoUrl ? (
+          <video className="media-video" src={item.videoUrl} controls playsInline preload="metadata" />
+        ) : null}
         <footer className="who-line">
           <span className="avatar" aria-hidden="true">{initials(item.name)}</span>
           <span>

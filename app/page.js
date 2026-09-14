@@ -41,6 +41,12 @@ export default async function Home() {
               <Link className="card-link" href={`/q/${item.id}`}>
                 <span className="quote-mark" aria-hidden="true">“</span>
                 <blockquote>{item.quote}</blockquote>
+                {item.imageUrl ? (
+                  <img className="media-image" src={item.imageUrl} alt="" />
+                ) : null}
+                {item.videoUrl ? (
+                  <video className="media-video" src={item.videoUrl} controls playsInline preload="metadata" />
+                ) : null}
                 <footer>
                   <span className="avatar" aria-hidden="true">{initials(item.name)}</span>
                   <span>
