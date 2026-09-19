@@ -1,7 +1,7 @@
 import Link from "next/link";
 import EmbedShare from "./embed-share.js";
 import { listTestimonials } from "../lib/testimonials.js";
-import { YoutubeEmbed } from "./media-embeds.js";
+import { TwitterEmbed, YoutubeEmbed } from "./media-embeds.js";
 
 export const dynamic = "force-dynamic";
 
@@ -49,6 +49,7 @@ export default async function Home() {
                   <video className="media-video" src={item.videoUrl} controls playsInline preload="metadata" />
                 ) : null}
                 <YoutubeEmbed url={item.youtubeUrl} />
+                <TwitterEmbed url={item.twitterUrl} />
                 <footer>
                   <span className="avatar" aria-hidden="true">{initials(item.name)}</span>
                   <span>
