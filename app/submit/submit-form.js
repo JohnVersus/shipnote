@@ -12,7 +12,7 @@ export default function SubmitForm({ error }) {
   return (
     <form className="composer" action={submitTestimonial}>
       <p className="kicker">Add a testimonial</p>
-      <p className="composer-hint">No account. Optional image or short video (up to 128 MB).</p>
+      <p className="composer-hint">No account. Optional image, short video (up to 128 MB), or YouTube link.</p>
       <label className="sr" htmlFor="quote">Quote</label>
       <textarea
         id="quote"
@@ -28,6 +28,14 @@ export default function SubmitForm({ error }) {
         <label className="sr" htmlFor="detail">Detail</label>
         <input id="detail" name="detail" maxLength={80} placeholder="Role, optional" />
       </div>
+      <label className="sr" htmlFor="youtubeUrl">YouTube URL</label>
+      <input
+        id="youtubeUrl"
+        name="youtubeUrl"
+        type="url"
+        maxLength={500}
+        placeholder="YouTube URL, optional"
+      />
       <input type="hidden" name="imageUrl" value={imageUrl} />
       <input type="hidden" name="videoUrl" value={videoUrl} />
       <div className="media-row">

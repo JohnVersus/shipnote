@@ -10,6 +10,7 @@ export async function submitTestimonial(formData) {
     detail: formData.get("detail"),
     imageUrl: formData.get("imageUrl"),
     videoUrl: formData.get("videoUrl"),
+    youtubeUrl: formData.get("youtubeUrl"),
   });
 
   if (result.error) {
