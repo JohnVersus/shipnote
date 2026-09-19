@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import CopyPath from "../../copy-path.js";
 import { getTestimonial } from "../../../lib/testimonials.js";
-import { YoutubeEmbed } from "../../media-embeds.js";
+import { TwitterEmbed, YoutubeEmbed } from "../../media-embeds.js";
 
 export const dynamic = "force-dynamic";
 
@@ -35,6 +35,7 @@ export default async function QuotePage({ params }) {
           <video className="media-video" src={item.videoUrl} controls playsInline preload="metadata" />
         ) : null}
         <YoutubeEmbed url={item.youtubeUrl} />
+        <TwitterEmbed url={item.twitterUrl} />
         <footer className="who-line">
           <span className="avatar" aria-hidden="true">{initials(item.name)}</span>
           <span>

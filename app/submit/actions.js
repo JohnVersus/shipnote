@@ -11,6 +11,7 @@ export async function submitTestimonial(formData) {
     imageUrl: formData.get("imageUrl"),
     videoUrl: formData.get("videoUrl"),
     youtubeUrl: formData.get("youtubeUrl"),
+    twitterUrl: formData.get("twitterUrl"),
   });
 
   if (result.error) {

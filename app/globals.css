@@ -324,3 +324,12 @@ a { color: inherit; }
   padding: 12px 0;
 }
 .composer input[type="url"]:focus { outline: none; }
+
+.tweet-embed {
+  margin-top: 14px;
+  max-width: 100%;
+  overflow: hidden;
+}
+.tweet-embed blockquote {
+  margin: 0;
+}
