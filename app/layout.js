@@ -1,3 +1,4 @@
+import "@uploadthing/react/styles.css";
 import "./globals.css";
 
 export const metadata = {

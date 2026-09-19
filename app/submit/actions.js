@@ -8,6 +8,8 @@ export async function submitTestimonial(formData) {
     name: formData.get("name"),
     quote: formData.get("quote"),
     detail: formData.get("detail"),
+    imageUrl: formData.get("imageUrl"),
+    videoUrl: formData.get("videoUrl"),
   });
 
   if (result.error) {

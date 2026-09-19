@@ -269,3 +269,28 @@ a { color: inherit; }
 
 .share-stack { display: grid; gap: 10px; width: min(720px, 100%); }
 .share-stack .embed-box code { white-space: pre-wrap; }
+
+.media-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 18px;
+}
+.media-label, .media-ok {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.media-ok { color: var(--accent); }
+.media-image, .media-video {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: #000;
+}
+.media-video { max-height: 280px; }
+@media (max-width: 900px) {
+  .media-row { grid-template-columns: 1fr; }
+}
