@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { listTestimonials } from "../../lib/testimonials.js";
+import { YoutubeEmbed } from "../media-embeds.js";
 
 export const dynamic = "force-dynamic";
 
@@ -34,6 +35,7 @@ export default async function EmbedPage() {
                 {item.videoUrl ? (
                   <video className="media-video" src={item.videoUrl} controls playsInline preload="metadata" />
                 ) : null}
+                <YoutubeEmbed url={item.youtubeUrl} />
                 <footer>
                   <span className="avatar" aria-hidden="true">{initials(item.name)}</span>
                   <strong>{item.name}</strong>
