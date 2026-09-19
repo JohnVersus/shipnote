@@ -11,7 +11,7 @@ export const ourFileRouter = {
       url: file.ufsUrl || file.url,
     })),
   testimonialVideo: f({
-    video: { maxFileSize: "16MB", maxFileCount: 1 },
+    video: { maxFileSize: "128MB", maxFileCount: 1 },
   })
     .middleware(async () => ({}))
     .onUploadComplete(async ({ file }) => ({

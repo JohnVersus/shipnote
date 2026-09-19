@@ -12,7 +12,7 @@ export default function SubmitForm({ error }) {
   return (
     <form className="composer" action={submitTestimonial}>
       <p className="kicker">Add a testimonial</p>
-      <p className="composer-hint">No account. Optional image or short video.</p>
+      <p className="composer-hint">No account. Optional image or short video (up to 128 MB).</p>
       <label className="sr" htmlFor="quote">Quote</label>
       <textarea
         id="quote"
@@ -46,7 +46,7 @@ export default function SubmitForm({ error }) {
           {imageUrl ? <p className="media-ok">Image ready</p> : null}
         </div>
         <div>
-          <p className="media-label">Short video, optional</p>
+          <p className="media-label">Short video, optional · 128 MB</p>
           <UploadButton
             endpoint="testimonialVideo"
             onClientUploadComplete={(res) => {
