@@ -12,7 +12,7 @@ No account.
 - The public wall is `/`. It copies a ready-to-paste iframe for `/embed`, plus the URL as a second option.
 - The same quotes embed at `/embed` (up to 10). Featured IDs in KV come first; newest non-featured fill the rest. The iframe path stays `/embed`.
 - Curate featured quotes at `/manage` with `MANAGE_TOKEN` (cookie unlock). No paid deps.
-- Seed demo data: `bun run seed` (needs KV env).
+- Seed demo data: `bun run seed` (needs KV env), or one-click seed on `/manage` when unlocked.
 
 The host needs `KV_REST_API_URL` and `KV_REST_API_TOKEN`. Without them, the wall stays empty and submit fails.
 

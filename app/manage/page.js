@@ -8,6 +8,7 @@ import {
   lockManage,
   moveFeatured,
   pinTestimonial,
+  seedManageDemo,
   unlockManage,
   unpinTestimonial,
 } from "./actions.js";
@@ -17,6 +18,7 @@ export const dynamic = "force-dynamic";
 export default async function ManagePage({ searchParams }) {
   const params = await searchParams;
   const error = typeof params?.error === "string" ? params.error : "";
+  const seeded = typeof params?.seeded === "string" ? params.seeded : "";
   const tokenReady = manageTokenConfigured();
   const unlocked = await isManageAuthenticated();
   const items = unlocked ? await listTestimonials() : [];
@@ -69,6 +71,27 @@ export default async function ManagePage({ searchParams }) {
               <span className="badge">{featuredItems.length} pinned · fill to 10</span>
             </div>
             {error ? <p className="error">{error}</p> : null}
+            {seeded ? (
+              <p className="manage-note">
+                Seeded {seeded} demo testimonials and pinned a starter featured set for `/embed`.
+              </p>
+            ) : null}
+
+            <section className="manage-section seed-panel">
+              <h2 className="kicker">Demo seed</h2>
+              <p className="manage-note">
+                One click loads 12 dummy testimonials (image, YouTube, and X examples) and pins a
+                starter featured set for the embed. This <strong>replaces</strong> the current
+                testimonials list in KV — same as <code>bun run seed</code>.
+              </p>
+              <p className="manage-note">
+                Uploaded short video still needs a real UploadThing file. The seed skips uploaded
+                video and uses public image / YouTube / X links instead.
+              </p>
+              <form action={seedManageDemo} className="manage-actions" style={{ marginTop: 12 }}>
+                <button type="submit">Seed demo testimonials</button>
+              </form>
+            </section>
 
             <section className="manage-section">
               <h2 className="kicker">Pinned for embed</h2>

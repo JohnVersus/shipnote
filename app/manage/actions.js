@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { seedDemoTestimonials } from "../../lib/seed.js";
 import {
   getFeaturedIds,
   listTestimonials,
@@ -84,3 +85,14 @@ export async function moveFeatured(formData) {
   await setFeaturedIds(next);
   redirect("/manage");
 }
+
+export async function seedManageDemo() {
+  const gate = await requireManage();
+  if (gate.error) redirect(`/manage?error=${encodeURIComponent(gate.error)}`);
+  const result = await seedDemoTestimonials();
+  if (result.error) {
+    redirect(`/manage?error=${encodeURIComponent(result.error)}`);
+  }
+  redirect(`/manage?seeded=${result.count}`);
+}
+
