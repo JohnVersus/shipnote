@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { listTestimonials } from "../../lib/testimonials.js";
+import { listEmbedTestimonials } from "../../lib/testimonials.js";
 import { TwitterEmbed, YoutubeEmbed } from "../media-embeds.js";
 
 export const dynamic = "force-dynamic";
@@ -13,7 +13,7 @@ function initials(name) {
 }
 
 export default async function EmbedPage() {
-  const items = await listTestimonials();
+  const items = await listEmbedTestimonials();
 
   return (
     <main className="widget">
@@ -25,7 +25,7 @@ export default async function EmbedPage() {
         <p className="widget-empty">No testimonials yet.</p>
       ) : (
         <ol>
-          {items.slice(0, 8).map((item) => (
+          {items.map((item) => (
             <li key={item.id}>
               <Link href={`/q/${item.id}`}>
                 <blockquote>{item.quote}</blockquote>
