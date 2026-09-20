@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "test": "bun test",
-    "start": "next start"
+    "start": "next start",
+    "seed": "bun scripts/seed.js"
   },
   "dependencies": {
     "@uploadthing/react": "^7.3.3",
