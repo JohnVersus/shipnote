@@ -10,7 +10,7 @@ export default function EmbedShare({ path = "/embed" }) {
     setUrl(`${window.location.origin}${path}`);
   }, [path]);
 
-  const iframe = `<iframe src="${url}" title="Shipnote testimonials" loading="lazy" style="width:100%;max-width:380px;height:520px;border:0;border-radius:18px;overflow:hidden;"></iframe>`;
+  const iframe = `<iframe src="${url}" title="Shipnote testimonials" loading="lazy" style="width:100%;max-width:380px;height:520px;border:0;border-radius:22px;overflow:hidden;"></iframe>`;
 
   async function copy(kind, value) {
     try {

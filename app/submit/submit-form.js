@@ -12,7 +12,9 @@ export default function SubmitForm({ error }) {
   return (
     <form className="composer" action={submitTestimonial}>
       <p className="kicker">Add a testimonial</p>
-      <p className="composer-hint">No account. Optional image, short video (up to 128 MB), YouTube, or X post.</p>
+      <p className="composer-hint">
+        No account. Quote and name required. Optional image, short video (up to 128 MB), YouTube, or X post.
+      </p>
       <label className="sr" htmlFor="quote">Quote</label>
       <textarea
         id="quote"
@@ -28,54 +30,60 @@ export default function SubmitForm({ error }) {
         <label className="sr" htmlFor="detail">Detail</label>
         <input id="detail" name="detail" maxLength={80} placeholder="Role, optional" />
       </div>
-      <label className="sr" htmlFor="youtubeUrl">YouTube URL</label>
-      <input
-        id="youtubeUrl"
-        name="youtubeUrl"
-        type="url"
-        maxLength={500}
-        placeholder="YouTube URL, optional"
-      />
-      <label className="sr" htmlFor="twitterUrl">X or Twitter URL</label>
-      <input
-        id="twitterUrl"
-        name="twitterUrl"
-        type="url"
-        maxLength={500}
-        placeholder="X or Twitter post URL, optional"
-      />
-      <input type="hidden" name="imageUrl" value={imageUrl} />
-      <input type="hidden" name="videoUrl" value={videoUrl} />
-      <div className="media-row">
-        <div>
-          <p className="media-label">Image, optional</p>
-          <UploadButton
-            endpoint="testimonialImage"
-            onClientUploadComplete={(res) => {
-              const file = res?.[0];
-              const url = file?.ufsUrl || file?.url || file?.serverData?.url || "";
-              setImageUrl(url);
-              setUploadError("");
-            }}
-            onUploadError={(err) => setUploadError(err.message)}
-          />
-          {imageUrl ? <p className="media-ok">Image ready</p> : null}
-        </div>
-        <div>
-          <p className="media-label">Short video, optional · 128 MB</p>
-          <UploadButton
-            endpoint="testimonialVideo"
-            onClientUploadComplete={(res) => {
-              const file = res?.[0];
-              const url = file?.ufsUrl || file?.url || file?.serverData?.url || "";
-              setVideoUrl(url);
-              setUploadError("");
-            }}
-            onUploadError={(err) => setUploadError(err.message)}
-          />
-          {videoUrl ? <p className="media-ok">Video ready</p> : null}
+
+      <div className="media-panel">
+        <p className="media-panel-title">Optional media</p>
+        <p className="composer-hint">Links and uploads show on the wall, quote page, and embed.</p>
+        <label className="field-label" htmlFor="youtubeUrl">YouTube URL</label>
+        <input
+          id="youtubeUrl"
+          name="youtubeUrl"
+          type="url"
+          maxLength={500}
+          placeholder="https://www.youtube.com/watch?v=…"
+        />
+        <label className="field-label" htmlFor="twitterUrl">X or Twitter URL</label>
+        <input
+          id="twitterUrl"
+          name="twitterUrl"
+          type="url"
+          maxLength={500}
+          placeholder="https://x.com/…/status/…"
+        />
+        <input type="hidden" name="imageUrl" value={imageUrl} />
+        <input type="hidden" name="videoUrl" value={videoUrl} />
+        <div className="media-row">
+          <div>
+            <p className="media-label">Image · up to 4 MB</p>
+            <UploadButton
+              endpoint="testimonialImage"
+              onClientUploadComplete={(res) => {
+                const file = res?.[0];
+                const url = file?.ufsUrl || file?.url || file?.serverData?.url || "";
+                setImageUrl(url);
+                setUploadError("");
+              }}
+              onUploadError={(err) => setUploadError(err.message)}
+            />
+            {imageUrl ? <p className="media-ok">Image ready</p> : null}
+          </div>
+          <div>
+            <p className="media-label">Short video · up to 128 MB</p>
+            <UploadButton
+              endpoint="testimonialVideo"
+              onClientUploadComplete={(res) => {
+                const file = res?.[0];
+                const url = file?.ufsUrl || file?.url || file?.serverData?.url || "";
+                setVideoUrl(url);
+                setUploadError("");
+              }}
+              onUploadError={(err) => setUploadError(err.message)}
+            />
+            {videoUrl ? <p className="media-ok">Video ready</p> : null}
+          </div>
         </div>
       </div>
+
       <div className="composer-bar">
         <span>Quote and name. Media optional.</span>
         <button type="submit">Add a testimonial</button>

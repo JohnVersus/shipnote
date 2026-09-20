@@ -36,9 +36,7 @@ export default async function ManagePage({ searchParams }) {
 
       <section className="manage">
         <p className="kicker">Embed featured</p>
-        <h1 style={{ margin: "8px 0 0", fontFamily: "var(--font-display)", fontSize: "36px", letterSpacing: "-0.03em" }}>
-          Manage pinned testimonials
-        </h1>
+        <h1 className="manage-title">Manage pinned testimonials</h1>
         <p className="manage-note">
           `/embed` shows up to 10 quotes: pinned IDs first (in order), then newest non-pinned.
           The iframe snippet stays `/embed` — pin changes only the data.
@@ -72,73 +70,77 @@ export default async function ManagePage({ searchParams }) {
             </div>
             {error ? <p className="error">{error}</p> : null}
 
-            <h2 className="kicker" style={{ marginTop: 28 }}>Pinned for embed</h2>
-            {featuredItems.length === 0 ? (
-              <p className="manage-note">None pinned yet. Newest quotes fill the embed until you pin.</p>
-            ) : (
-              <ol className="manage-list">
-                {featuredItems.map((item, index) => (
-                  <li className="manage-item pinned" key={item.id}>
-                    <p>{item.quote}</p>
-                    <p className="meta">
-                      {item.name}
-                      {item.detail ? ` · ${item.detail}` : ""} · #{index + 1}
-                    </p>
-                    <div className="manage-actions">
-                      <form action={moveFeatured}>
-                        <input type="hidden" name="id" value={item.id} />
-                        <input type="hidden" name="direction" value="up" />
-                        <button className="button-ghost" type="submit" disabled={index === 0}>
-                          Move up
-                        </button>
-                      </form>
-                      <form action={moveFeatured}>
-                        <input type="hidden" name="id" value={item.id} />
-                        <input type="hidden" name="direction" value="down" />
-                        <button
-                          className="button-ghost"
-                          type="submit"
-                          disabled={index === featuredItems.length - 1}
-                        >
-                          Move down
-                        </button>
-                      </form>
-                      <form action={unpinTestimonial}>
-                        <input type="hidden" name="id" value={item.id} />
-                        <button className="button-ghost" type="submit">Unpin</button>
-                      </form>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            )}
+            <section className="manage-section">
+              <h2 className="kicker">Pinned for embed</h2>
+              {featuredItems.length === 0 ? (
+                <p className="manage-note">None pinned yet. Newest quotes fill the embed until you pin.</p>
+              ) : (
+                <ol className="manage-list">
+                  {featuredItems.map((item, index) => (
+                    <li className="manage-item pinned" key={item.id}>
+                      <p>{item.quote}</p>
+                      <p className="meta">
+                        {item.name}
+                        {item.detail ? ` · ${item.detail}` : ""} · #{index + 1}
+                      </p>
+                      <div className="manage-actions">
+                        <form action={moveFeatured}>
+                          <input type="hidden" name="id" value={item.id} />
+                          <input type="hidden" name="direction" value="up" />
+                          <button className="button-ghost" type="submit" disabled={index === 0}>
+                            Move up
+                          </button>
+                        </form>
+                        <form action={moveFeatured}>
+                          <input type="hidden" name="id" value={item.id} />
+                          <input type="hidden" name="direction" value="down" />
+                          <button
+                            className="button-ghost"
+                            type="submit"
+                            disabled={index === featuredItems.length - 1}
+                          >
+                            Move down
+                          </button>
+                        </form>
+                        <form action={unpinTestimonial}>
+                          <input type="hidden" name="id" value={item.id} />
+                          <button className="button-ghost" type="submit">Unpin</button>
+                        </form>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </section>
 
-            <h2 className="kicker" style={{ marginTop: 28 }}>All testimonials</h2>
-            {others.length === 0 && featuredItems.length === 0 ? (
-              <p className="manage-note">No testimonials yet. Run <code>bun run seed</code> or submit one.</p>
-            ) : others.length === 0 ? (
-              <p className="manage-note">Every quote is pinned.</p>
-            ) : (
-              <ul className="manage-list">
-                {others.map((item) => (
-                  <li className="manage-item" key={item.id}>
-                    <p>{item.quote}</p>
-                    <p className="meta">
-                      {item.name}
-                      {item.detail ? ` · ${item.detail}` : ""}
-                    </p>
-                    <div className="manage-actions">
-                      <form action={pinTestimonial}>
-                        <input type="hidden" name="id" value={item.id} />
-                        <button type="submit" disabled={featuredItems.length >= 10}>
-                          Pin to embed
-                        </button>
-                      </form>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            )}
+            <section className="manage-section">
+              <h2 className="kicker">All testimonials</h2>
+              {others.length === 0 && featuredItems.length === 0 ? (
+                <p className="manage-note">No testimonials yet. Run <code>bun run seed</code> or submit one.</p>
+              ) : others.length === 0 ? (
+                <p className="manage-note">Every quote is pinned.</p>
+              ) : (
+                <ul className="manage-list">
+                  {others.map((item) => (
+                    <li className="manage-item" key={item.id}>
+                      <p>{item.quote}</p>
+                      <p className="meta">
+                        {item.name}
+                        {item.detail ? ` · ${item.detail}` : ""}
+                      </p>
+                      <div className="manage-actions">
+                        <form action={pinTestimonial}>
+                          <input type="hidden" name="id" value={item.id} />
+                          <button type="submit" disabled={featuredItems.length >= 10}>
+                            Pin to embed
+                          </button>
+                        </form>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
           </>
         )}
       </section>

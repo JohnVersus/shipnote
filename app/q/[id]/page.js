@@ -23,10 +23,10 @@ export default async function QuotePage({ params }) {
     <main>
       <header className="bar">
         <Link className="mark" href="/">Shipnote</Link>
-        <Link className="text-link" href="/">Wall</Link>
+        <Link className="text-link" href="/">Back to the wall</Link>
       </header>
       <article className="composer quote-page">
-        <p className="kicker">Testimonial</p>
+        <p className="kicker">Public testimonial</p>
         <blockquote>{item.quote}</blockquote>
         {item.imageUrl ? (
           <img className="media-image" src={item.imageUrl} alt="" />
