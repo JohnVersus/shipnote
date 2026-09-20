@@ -16,7 +16,7 @@ const sans = Manrope({
 
 export const metadata = {
   title: "Shipnote",
-  description: "Collect a testimonial, show a public wall, and embed it.",
+  description: "Collect a testimonial, show a public wall, and embed it — no account.",
 };
 
 export default function RootLayout({ children }) {

@@ -39,7 +39,10 @@ export default async function EmbedPage() {
                 <TwitterEmbed url={item.twitterUrl} />
                 <footer>
                   <span className="avatar" aria-hidden="true">{initials(item.name)}</span>
-                  <strong>{item.name}</strong>
+                  <span>
+                    <strong>{item.name}</strong>
+                    {item.detail ? <em>{item.detail}</em> : null}
+                  </span>
                 </footer>
               </Link>
             </li>
