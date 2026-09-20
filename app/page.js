@@ -26,7 +26,9 @@ export default async function Home() {
       <section className="hero">
         <p className="kicker">Public wall</p>
         <h1>What people actually said.</h1>
-        <p className="lede">No account. A quote goes on this wall, and the same quotes sit in the embed.</p>
+        <p className="lede">
+          No account. A quote goes on this wall, and the same quotes sit in the embed.
+        </p>
         <EmbedShare path="/embed" />
       </section>
 
@@ -36,7 +38,7 @@ export default async function Home() {
           <Link className="button" href="/submit">Add a testimonial</Link>
         </section>
       ) : (
-        <section className="wall">
+        <section className="wall" aria-label="Testimonials">
           {items.map((item) => (
             <article className="card" key={item.id}>
               <Link className="card-link" href={`/q/${item.id}`}>
