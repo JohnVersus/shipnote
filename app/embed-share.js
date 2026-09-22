@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const EMBED_LAYOUTS = [
   {
@@ -12,7 +12,7 @@ export const EMBED_LAYOUTS = [
     width: "100%",
     maxWidth: "880px",
     height: "540px",
-    previewHeight: "440px",
+    previewHeight: "420px",
   },
   {
     id: "stack",
@@ -23,7 +23,7 @@ export const EMBED_LAYOUTS = [
     width: "100%",
     maxWidth: "380px",
     height: "520px",
-    previewHeight: "440px",
+    previewHeight: "420px",
   },
   {
     id: "row",
@@ -45,15 +45,14 @@ export const EMBED_LAYOUTS = [
     width: "100%",
     maxWidth: "880px",
     height: "540px",
-    previewHeight: "440px",
+    previewHeight: "420px",
   },
 ];
 
-export default function EmbedShare({ defaultLayout = "masonry" } = {}) {
-  const [selectedId, setSelectedId] = useState(defaultLayout);
+function EmbedCustomizerContent() {
+  const [selectedId, setSelectedId] = useState("masonry");
   const [origin, setOrigin] = useState("");
   const [copied, setCopied] = useState("");
-  const [showPreview, setShowPreview] = useState(true);
 
   useEffect(() => {
     setOrigin(window.location.origin);
@@ -80,52 +79,33 @@ export default function EmbedShare({ defaultLayout = "masonry" } = {}) {
   }
 
   return (
-    <div className="share-stack embed-customizer">
-      <div className="embed-box embed-actions">
-        <div className="embed-toolbar">
-          <div className="embed-layout-tabs" role="tablist" aria-label="Embed layout options">
-            {EMBED_LAYOUTS.map((layout) => {
-              const isActive = layout.id === selectedId;
-              return (
-                <button
-                  key={layout.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  className={`embed-layout-btn ${isActive ? "active" : ""}`}
-                  onClick={() => setSelectedId(layout.id)}
-                >
-                  <span>{layout.label}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          <button
-            type="button"
-            className="embed-preview-toggle"
-            onClick={() => setShowPreview((prev) => !prev)}
-            aria-expanded={showPreview}
-          >
-            {showPreview ? "Hide preview" : "Show preview"}
-          </button>
-        </div>
-
-        <p className="embed-layout-desc">
-          <strong>{current.label}:</strong> {current.desc}
-        </p>
-
-        <div className="embed-actions-row">
-          <button type="button" onClick={() => copy("iframe", iframeCode)}>
-            {copied === "iframe" ? "Copied" : "Copy iframe code"}
-          </button>
-          <button type="button" onClick={() => copy("url", fullUrl)}>
-            {copied === "url" ? "Copied" : "Copy embed URL"}
-          </button>
-        </div>
+    <div className="embed-modal-body">
+      {/* Layout Tabs */}
+      <div className="embed-layout-tabs" role="tablist" aria-label="Embed layout options">
+        {EMBED_LAYOUTS.map((layout) => {
+          const isActive = layout.id === selectedId;
+          return (
+            <button
+              key={layout.id}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              className={`embed-layout-btn${isActive ? " active" : ""}`}
+              onClick={() => setSelectedId(layout.id)}
+            >
+              {layout.label}
+            </button>
+          );
+        })}
       </div>
 
-      {showPreview && origin ? (
+      {/* Description */}
+      <p className="embed-layout-desc">
+        <strong>{current.label}:</strong> {current.desc}
+      </p>
+
+      {/* Live Preview */}
+      {origin ? (
         <div className="embed-preview-container">
           <div className="embed-preview-header">
             <span>
@@ -149,6 +129,95 @@ export default function EmbedShare({ defaultLayout = "masonry" } = {}) {
           />
         </div>
       ) : null}
+
+      {/* Copy Actions */}
+      <div className="embed-actions-row">
+        <button
+          type="button"
+          className="button"
+          onClick={() => copy("iframe", iframeCode)}
+        >
+          {copied === "iframe" ? "✓ Copied" : "Copy iframe code"}
+        </button>
+        <button
+          type="button"
+          className="button-ghost"
+          onClick={() => copy("url", fullUrl)}
+        >
+          {copied === "url" ? "✓ Copied" : "Copy embed URL"}
+        </button>
+      </div>
     </div>
+  );
+}
+
+export default function EmbedModal() {
+  const dialogRef = useRef(null);
+  const [open, setOpen] = useState(false);
+
+  function openModal() {
+    setOpen(true);
+    // showModal() gives us native backdrop + focus trap + Escape key for free
+    dialogRef.current?.showModal();
+  }
+
+  function closeModal() {
+    dialogRef.current?.close();
+    setOpen(false);
+  }
+
+  // Sync close when user presses Escape (dialog fires 'close' natively)
+  useEffect(() => {
+    const el = dialogRef.current;
+    if (!el) return;
+    function onClose() { setOpen(false); }
+    el.addEventListener("close", onClose);
+    return () => el.removeEventListener("close", onClose);
+  }, []);
+
+  // Close on backdrop click
+  function onDialogClick(e) {
+    if (e.target === dialogRef.current) closeModal();
+  }
+
+  return (
+    <>
+      <button
+        id="open-embed-modal"
+        type="button"
+        className="button embed-open-btn"
+        onClick={openModal}
+        aria-haspopup="dialog"
+      >
+        Customize &amp; copy embed →
+      </button>
+
+      <dialog
+        ref={dialogRef}
+        className="embed-modal"
+        aria-label="Embed customizer"
+        aria-modal="true"
+        onClick={onDialogClick}
+      >
+        <div className="embed-modal-inner">
+          <div className="embed-modal-header">
+            <div>
+              <p className="kicker" style={{ margin: 0 }}>Embed</p>
+              <h2 className="embed-modal-title">Customize your embed</h2>
+            </div>
+            <button
+              type="button"
+              className="embed-modal-close"
+              aria-label="Close customizer"
+              onClick={closeModal}
+            >
+              ✕
+            </button>
+          </div>
+
+          {open ? <EmbedCustomizerContent /> : null}
+        </div>
+      </dialog>
+    </>
   );
 }

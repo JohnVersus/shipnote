@@ -1,5 +1,5 @@
 import Link from "next/link";
-import EmbedShare from "./embed-share.js";
+import EmbedModal from "./embed-share.js";
 import SiteHeader from "./site-header.js";
 import { listTestimonials } from "../lib/testimonials.js";
 import { TwitterEmbed, YoutubeEmbed } from "./media-embeds.js";
@@ -40,6 +40,10 @@ export default async function Home() {
           <p className="lede">
             No account. A quote goes on this wall, and the same quotes sit in the embed.
           </p>
+          <div className="hero-actions">
+            <Link className="button" href="/submit">Add a testimonial</Link>
+            <EmbedModal />
+          </div>
         </div>
         <aside className="hero-aside" aria-label="Wall snapshot">
           <div className="stat">
@@ -55,7 +59,6 @@ export default async function Home() {
             <em>max in embed</em>
           </div>
         </aside>
-        <EmbedShare path="/embed" />
       </section>
 
       {items.length === 0 ? (
