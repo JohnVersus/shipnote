@@ -1,6 +1,7 @@
 import { getFeaturedIds, listTestimonials } from "../../lib/testimonials.js";
 import SiteHeader from "../site-header.js";
 import {
+  DEMO_MODE,
   isManageAuthenticated,
   manageTokenConfigured,
 } from "../../lib/manage-auth.js";
@@ -62,11 +63,20 @@ export default async function ManagePage({ searchParams }) {
         ) : (
           <>
             <div className="manage-actions" style={{ marginTop: 16 }}>
-              <form action={lockManage}>
-                <button className="button-ghost" type="submit">Lock</button>
-              </form>
+              {DEMO_MODE ? (
+                <span className="badge">Hackathon Demo · Unlocked</span>
+              ) : (
+                <form action={lockManage}>
+                  <button className="button-ghost" type="submit">Lock</button>
+                </form>
+              )}
               <span className="badge">{featuredItems.length} pinned · fill to 10</span>
             </div>
+            {DEMO_MODE ? (
+              <p className="manage-note" style={{ marginTop: 12 }}>
+                Hackathon demo: Token check is disabled so you can test pinning, unpinning, reordering, and the one-click demo seed without credentials.
+              </p>
+            ) : null}
             {error ? <p className="error">{error}</p> : null}
             {seeded ? (
               <p className="manage-note">

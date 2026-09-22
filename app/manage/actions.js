@@ -9,6 +9,7 @@ import {
   setFeaturedIds,
 } from "../../lib/testimonials.js";
 import {
+  DEMO_MODE,
   isManageAuthenticated,
   MANAGE_COOKIE,
   manageTokenConfigured,
@@ -16,6 +17,7 @@ import {
 } from "../../lib/manage-auth.js";
 
 async function requireManage() {
+  if (DEMO_MODE) return { ok: true };
   if (!manageTokenConfigured()) {
     return { error: "MANAGE_TOKEN is not set on the host." };
   }

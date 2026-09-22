@@ -13,7 +13,7 @@ export default async function SiteHeader() {
         <Link href="/submit">Submit</Link>
         <Link href="/embed">Embed</Link>
         {sampleId ? <Link href={`/q/${sampleId}`}>Sample</Link> : null}
-        <Link className="site-nav-manage" href="/manage">Manage · token</Link>
+        <Link className="site-nav-manage" href="/manage">Manage</Link>
       </nav>
     </header>
   );
