@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import CopyPath from "../../copy-path.js";
+import SiteHeader from "../../site-header.js";
 import { getTestimonial } from "../../../lib/testimonials.js";
 import { TwitterEmbed, YoutubeEmbed } from "../../media-embeds.js";
 
@@ -21,10 +21,7 @@ export default async function QuotePage({ params }) {
 
   return (
     <main>
-      <header className="bar">
-        <Link className="mark" href="/">Shipnote</Link>
-        <Link className="text-link" href="/">Back to the wall</Link>
-      </header>
+      <SiteHeader />
       <article className="composer quote-page">
         <p className="kicker">Public testimonial</p>
         <blockquote>{item.quote}</blockquote>

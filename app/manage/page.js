@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { getFeaturedIds, listTestimonials } from "../../lib/testimonials.js";
+import SiteHeader from "../site-header.js";
 import {
   isManageAuthenticated,
   manageTokenConfigured,
@@ -31,10 +31,7 @@ export default async function ManagePage({ searchParams }) {
 
   return (
     <main>
-      <header className="bar">
-        <Link className="mark" href="/">Shipnote</Link>
-        <Link className="text-link" href="/embed">Open embed</Link>
-      </header>
+      <SiteHeader />
 
       <section className="manage">
         <p className="kicker">Embed featured</p>

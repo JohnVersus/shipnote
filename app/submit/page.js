@@ -1,5 +1,5 @@
-import Link from "next/link";
 import SubmitForm from "./submit-form.js";
+import SiteHeader from "../site-header.js";
 
 export const dynamic = "force-dynamic";
 
@@ -9,10 +9,7 @@ export default async function SubmitPage({ searchParams }) {
 
   return (
     <main>
-      <header className="bar">
-        <Link className="mark" href="/">Shipnote</Link>
-        <Link className="text-link" href="/">Back to the wall</Link>
-      </header>
+      <SiteHeader />
       <SubmitForm error={error} />
     </main>
   );
