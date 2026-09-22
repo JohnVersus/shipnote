@@ -149,6 +149,39 @@ a { color: inherit; }
   border-bottom-color: var(--line);
 }
 
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px 14px;
+}
+
+.site-nav a {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 560;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.site-nav a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--line);
+}
+
+.site-nav a:focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.site-nav-manage {
+  color: var(--muted);
+  opacity: 0.9;
+}
+
 .hero, .empty-state, .composer, .manage {
   width: min(1100px, calc(100% - 40px));
   margin: 0 auto;
@@ -753,7 +786,7 @@ a { color: inherit; }
   .wall { column-count: 2; }
   .hero { grid-template-columns: 1fr; }
   .who, .composer-bar, .bar { align-items: stretch; flex-direction: column; }
-  .bar .button, .bar .text-link { align-self: flex-start; }
+  .bar .button, .bar .text-link, .bar .site-nav { align-self: flex-start; }
   .media-row { grid-template-columns: 1fr; }
 }
 

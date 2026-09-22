@@ -1,5 +1,6 @@
 import Link from "next/link";
 import EmbedShare from "./embed-share.js";
+import SiteHeader from "./site-header.js";
 import { listTestimonials } from "../lib/testimonials.js";
 import { TwitterEmbed, YoutubeEmbed } from "./media-embeds.js";
 
@@ -30,10 +31,7 @@ export default async function Home() {
 
   return (
     <main>
-      <header className="bar">
-        <Link className="mark" href="/">Shipnote</Link>
-        <Link className="button" href="/submit">Add a testimonial</Link>
-      </header>
+      <SiteHeader />
 
       <section className="hero">
         <div className="hero-copy">
