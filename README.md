@@ -9,7 +9,7 @@ No account.
 - Add a testimonial at `/submit` (quote and name required; optional detail).
 - Optional media on submit: image (up to 4 MB), short video (up to 128 MB), YouTube URL, or X/Twitter post URL. Shown on `/q/{id}`, the wall, and `/embed`.
 - Submit lands on `/q/{id}`, a public page with a copyable link. The wall and `/embed` show the same quote and any media.
-- The public wall is `/`. It copies a ready-to-paste iframe for `/embed`, plus the URL as a second option.
+- The public wall is `/`. Cards use a freestyle masonry layout (no stretched empty gaps). Share actions are buttons only: “Copy iframe code” and “Copy embed URL” — the raw snippet stays hidden.
 - The same quotes embed at `/embed` (up to 10). Featured IDs in KV come first; newest non-featured fill the rest. The iframe path stays `/embed`.
 - Curate featured quotes at `/manage` with `MANAGE_TOKEN` (cookie unlock). No paid deps.
 - Seed demo data from `/manage` when unlocked (Seed demo testimonials), or with `bun run seed` (needs KV env). Loads 12 samples with image, YouTube, and X examples, replaces the current KV list, and pins a starter featured set. Uploaded short video is not seeded — that still needs a real UploadThing file.
