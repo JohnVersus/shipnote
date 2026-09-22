@@ -12,13 +12,25 @@ function initials(name) {
     .join("");
 }
 
-export default async function EmbedPage() {
+export default async function EmbedPage({ searchParams }) {
+  const params = await searchParams;
+  const rawLayout = String(params?.layout || "stack").toLowerCase();
+  const validLayouts = ["stack", "masonry", "row", "grid"];
+  const layout = validLayouts.includes(rawLayout) ? rawLayout : "stack";
+
   const items = await listEmbedTestimonials();
 
+  const layoutLabels = {
+    stack: "Feed",
+    masonry: "Wall",
+    row: "Strip",
+    grid: "Grid",
+  };
+
   return (
-    <main className="widget">
+    <main className={`widget widget-${layout}`} data-layout={layout}>
       <header>
-        <span>Shipnote</span>
+        <span>Shipnote · {layoutLabels[layout] || "Feed"}</span>
         <Link href="/">Wall</Link>
       </header>
       {items.length === 0 ? (
