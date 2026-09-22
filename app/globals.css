@@ -735,6 +735,16 @@ a { color: inherit; }
   filter: none;
 }
 
+.seed-panel {
+  margin-top: 22px;
+  padding: 16px;
+  border: 1px dashed color-mix(in srgb, var(--line) 70%, var(--danger));
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--paper-soft) 85%, #fde8e8);
+}
+.seed-panel .manage-note strong { color: var(--ink); font-weight: 700; }
+.manage-section { margin-top: 8px; }
+
 @media (max-width: 900px) {
   .wall { grid-template-columns: 1fr; }
   .hero { grid-template-columns: 1fr; }
