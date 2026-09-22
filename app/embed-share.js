@@ -10,6 +10,12 @@ export default function EmbedShare({ path = "/embed" }) {
     setUrl(`${window.location.origin}${path}`);
   }, [path]);
 
+  useEffect(() => {
+    if (!copied) return undefined;
+    const timer = window.setTimeout(() => setCopied(""), 1600);
+    return () => window.clearTimeout(timer);
+  }, [copied]);
+
   const iframe = `<iframe src="${url}" title="Shipnote testimonials" loading="lazy" style="width:100%;max-width:380px;height:520px;border:0;border-radius:22px;overflow:hidden;"></iframe>`;
 
   async function copy(kind, value) {
@@ -23,18 +29,12 @@ export default function EmbedShare({ path = "/embed" }) {
 
   return (
     <div className="share-stack">
-      <div className="embed-box">
-        <span>Iframe</span>
-        <code>{iframe}</code>
+      <div className="embed-box embed-actions">
         <button type="button" onClick={() => copy("iframe", iframe)}>
-          {copied === "iframe" ? "Copied" : "Copy"}
+          {copied === "iframe" ? "Copied" : "Copy iframe code"}
         </button>
-      </div>
-      <div className="embed-box">
-        <span>URL</span>
-        <code>{url}</code>
         <button type="button" onClick={() => copy("url", url)}>
-          {copied === "url" ? "Copied" : "Copy"}
+          {copied === "url" ? "Copied" : "Copy embed URL"}
         </button>
       </div>
     </div>
