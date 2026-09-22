@@ -249,6 +249,11 @@ a { color: inherit; }
   box-shadow: var(--shadow);
 }
 
+.embed-box.embed-actions {
+  gap: 12px;
+  padding: 12px;
+}
+
 .embed-box code {
   flex: 1;
   min-width: 160px;
